@@ -35,6 +35,16 @@ jobs:
       - run: pip install -r requirements-dev.txt
       - run: mypy --config-file mypy.ini
 
+  lint-black-isort:
+    name: lint (black, isort)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/python-only
+      - run: pip install -r requirements-dev.txt
+      - run: black --check .
+      - run: isort --check-only .
+
   lint-flake8:
     name: lint (flake8)
     runs-on: ubuntu-latest
